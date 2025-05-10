@@ -1,0 +1,24 @@
+<%- include('./partials/header'); %>
+
+    <body class="h-screen w-screen flex items-center justify-center bg-gray-100">
+
+        <div class="relative h-full w-full">
+            <!-- Full-screen Image -->
+            <img src="https://play-lh.googleusercontent.com/kXJYGrvy4pvHwzw6tMgf-KPthnPDg4RvvoOTgffwSuHCUL63WVxaj3ojX3ADBS0UiD0=w480-h960-rw" alt="Background Image" class="object-cover w-full h-full">
+
+            <!-- Button at the Bottom -->
+            <div class="absolute bottom-0 w-full flex flex-col items-center mb-8 space-y-4">
+                <a href="/auth/google"
+                    class="bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg hover:bg-black transition duration-300">
+                    Continue with Google
+                </a>
+                <a href="/admin/login"
+                    class="bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg hover:bg-black transition duration-300">
+                    Admin Login
+                </a>
+            </div>
+        </div>
+
+    </body>
+
+    <%- include('./partials/footer'); %>

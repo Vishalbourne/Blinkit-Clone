@@ -1,0 +1,84 @@
+<%- include('./partials/header'); %>
+
+<body class="bg-gray-100">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-900">Product Management</h1>
+                <a href="/admin/dashboard" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">
+                    + Add Product
+                </a>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main class="flex-1 overflow-y-auto">
+            <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                
+                <!-- Search Bar -->
+                <div class="mb-6">
+                    <form action="/admin/products/search" method="GET" class="flex">
+                        <input type="text" name="product_id" placeholder="Search by Product ID"
+                            class="w-full p-2 border border-gray-300 rounded-l focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <button type="submit"
+                            class="bg-indigo-600 text-white py-2 px-4 rounded-r hover:bg-indigo-700">
+                            Search
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Product List by Category -->
+                <% for(let category in products){ %>
+                    <div class="bg-white shadow rounded-lg mb-6 p-6">
+                        <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2">
+                            <%= category %>
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                            <% products[category].forEach(function(product){ %>
+                                <div class="bg-gray-50 p-4 rounded-lg shadow flex flex-col items-center">
+                                    <!-- Product Image -->
+                                    <img class="w-32 h-32 mb-3 object-cover"
+                                        src="data:image/png;base64, <%= product.image.toString('base64') %>" alt="<%= product.name %>">
+                                    
+                                    <!-- Product Details -->
+                                    <h3 class="text-lg font-medium text-gray-900"><%= product.name %></h3>
+                                    <p class="mt-2 text-gray-600">Price: ₹<%= product.price %></p>
+                                    <p class="mt-2 text-gray-600">Stock: <%= product.stock %></p>
+                                    <p class="mt-2 text-gray-600 text-center text-sm">
+                                        <%= product.description.length > 50 ? product.description.substring(0, 50) + "..." : product.description %>
+                                    </p>
+                                    <p class="mt-2 text-sm text-gray-500">Product ID: <%= product._id %></p>
+
+                                    <!-- Action Buttons -->
+                                    <div class="mt-5 flex gap-4">
+                                        <a href="/products/delete/<%= product._id %>"
+                                            class="capitalize inline-block text-red-600 hover:underline">
+                                            Delete
+                                        </a>
+                                        <a href="/products/update/<%= product._id %>"
+                                            class="capitalize inline-block text-blue-600 hover:underline">
+                                            Update
+                                        </a>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        </div>
+
+                        <!-- Pagination / See More -->
+                        <div class="mt-4 text-center">
+                            <a href="/admin/products?category=<%= category %>&page=2"
+                                class="text-indigo-600 hover:text-indigo-800 font-medium">
+                                See More
+                            </a>
+                        </div>
+                    </div>
+                <% } %>
+
+            </div>
+        </main>
+    </div>
+</body>
+
+<%- include('./partials/footer'); %>
