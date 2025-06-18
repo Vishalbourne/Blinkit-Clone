@@ -201,7 +201,7 @@
                     axios.post('/payment/create/orderId')
                         .then(function (response) {
                             var options = {
-                                "key": "test_1234567890abcdef", // Replace with your Razorpay Key ID
+                                "key": "rzp_test_sZIjcDmf84EJg4", // Replace with your Razorpay Key ID
                                 "amount": response.data.amount, // Amount in paisa
                                 "currency": response.data.currency,
                                 "name": "BlinkIt",
@@ -216,7 +216,7 @@
                                     })
                                     .then(function (res) {
                                         let { razorpayOrderId, razorpayPaymentId, signature } = JSON.parse(res.config.data);
-                                        window.location.href = `/order/<%= userid %>/${razorpayOrderId}/${razorpayPaymentId}/${signature}`;
+                                        window.location.href = `/order/${razorpayOrderId}/${razorpayPaymentId}/${signature}`;
                                     })
                                     .catch(function (error) {
                                         console.error("Payment verification failed:", error);

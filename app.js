@@ -12,6 +12,7 @@ const categoryRouter = require('./routes/category');
 const userRouter = require('./routes/user');
 const cartRouter = require('./routes/cart');
 const paymentRouter = require('./routes/payment')
+const orderRouter = require('./routes/order');
 
 
 const path = require('path');
@@ -51,5 +52,6 @@ app.use('/categories', categoryRouter)
 app.use('/users', userRouter)
 app.use('/cart', cartRouter)
 app.use('/payment',paymentRouter)
+app.use('/order',orderRouter)
 
 app.listen(process.env.PORT);
